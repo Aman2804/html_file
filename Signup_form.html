@@ -1,0 +1,81 @@
+<!DOCKTYPE>
+<html>
+<head>
+  <title>signup Form</title>
+  <style>
+    body {background-image: url("login-background-1.jpg");
+  </style>
+</head>
+<body>
+  <h1>Signup</h1>
+  First name:<br>
+  <input id="first" type="text" name="First_name" ><br>
+  <span id="fist_name_error" style="color:red"></span><br>
+  last name:<br>
+  <input id="last" type="text" name="last_name" ><br>
+  <span id="last_name_error" style="color:red"></span><br>
+  Email:<br>
+  <input id="email" type="email" name="email" placeholder="Example.email@gmail.com" ><br>
+  <span id="email_error" style="color:red"></span><br>
+  Mobile No:<br>
+  <input id="num" type="number" name="mobile" max="10" ><br>
+  <span id="num_error" style="color:red"></span><br>
+  Gender:
+  <input type="radio" name="gender" value="male">male <input type="radio" name="gender" value="female">female<br>
+  Password:<br>
+  <input id="password" type="password" name="pwd" ><br>
+  <span id="pass" style="color:red"></span><br>
+  confirm password:<br>
+  <input id="con_pass" type="password" name="pwd" ><br>  
+  <span id="pass" style="color:red"></span><br>
+  <br>
+  <button type="submit" name="submit" style="background-color: #4CAF50"
+   value="submit" onclick="validate_submit()" >Submit</button><br>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $('#first').blur(function(){
+        var first = $('#first').val()
+        if (first == "")
+            $("#fist_name_error").text("First Name can't be blank");
+
+      })
+
+      $('#last').blur(function(){
+        var last = $('#last').val()
+        if (last == "")
+            $("#last_name_error").text("Last Name can't be blank");
+      })
+
+      $('#email').blur(function(){
+        var email = $('#email').val()
+        if (email=="" || email=="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
+            $("#email_error").text("Enter a valid email");
+      })
+
+      $('#num').blur(function(){
+        var num = $('#num').val()
+        if (num != 10 || num=="" )
+            $("#num_error").text("Enter a valid Mobile NO.");
+      })
+
+      $('#password').blur(function(){
+        var password = $('#password').val()
+        var confirm_password  = $('#con_pass').val()
+        if (password==confirm_password || password=="" || confirm_password=="")
+            $("#pass").text("password dose not match or empty");
+      })
+    })
+
+    // function validate_submit()
+    // {
+    //   validate_fist()
+    //   validate_last()
+    //   validate_email()
+    //   validate_num()
+    //   confirm_password()
+    // }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,137 @@
+<!DOCKTYPE>
+<html>
+<head>
+  <title>signup Form</title>
+  <style>
+    body {background-image: url("login-background-1.jpg");
+  </style>
+</head>
+<body>
+  <h1>Signup</h1>
+  First name:<br>
+  <input id= "first" type="text" name="First_name" placeholder="First name" onblur="validate_first()"><br>
+  <span id="first_name_error" style="color:red"></span><br>
+  last name:<br>
+  <input id="last" type="text" name="last_name" onblur="validate_last()" placeholder="Last name"><br>
+  <span id="last_name_error" style="color:red"></span><br>
+  Email:<br>
+  <input id="email" type="email" name="email" placeholder="Example.email@gmail.com" onblur="validate_email()"><br>
+  <span id="email_error" style="color:red"></span><br>
+  Mobile No:<br>
+  <input id="num" type="number" name="mobile" max="10" onblur="validate_num()" placeholder="Mobile No."><br>
+  <span id="num_error" style="color:red"></span><br>
+  <div id="gender1">
+  Gender:
+  <input id="1" type="radio" name="gender" value="male" onclick="validate_gender()" >male <input id="2" type="radio" name="gender" value="female" onclick="validate_gender()" >female</div>
+  <span id="gender" style="color:red"></span><br>
+  Password:<br>
+  <input id="password" type="password" name="pwd" onfocus="validate_gender()" onblur="confirm_password()"placeholder="password"><br>
+  <span id="pass1" style="color:red"></span><br>
+  confirm password:<br>
+  <input id="con_pass" type="password" name="pwd" onblur="confirm_password()" placeholder="confirm password"><br>  
+  <span id="pass2" style="color:red"></span><br>
+  <br>
+  <button type="submit" name="submit" style="background-color: #4CAF50"
+   value="submit" onclick="validate_submit()" >Submit</button><br>
+  <script>
+  	document.getElementById("first").addEventListener('keypress', validate_text);
+  	document.getElementById("last").addEventListener('keypress', validate_text);
+    function validate_text(key)
+    {	code = key.which;
+    	// debugger
+    	if ((code >=0 && code <65)||(code >90 && code <97) || (code >122))
+    	{
+    		key.preventDefault();
+    		return false;
+    	}
+    }
+    function validate_first()
+    { 
+    var first = document.getElementById("first").value
+    // debugger
+    if (first == "" )
+    
+      document.getElementById("first_name_error").innerHTML="First Name can't be blank";
+    else
+      document.getElementById("first_name_error").innerHTML="";
+  
+    }
+    function validate_last()
+    {
+      var last = document.getElementById("last").value
+      if (last=="")
+        document.getElementById("last_name_error").innerHTML="Last Name can't be blank";
+      else
+        document.getElementById("last_name_error").innerHTML="";    
+    }
+    function validate_email()
+    {
+      var email = document.getElementById("email").value
+      var email_format = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    var x = email_format.test(email)
+      if (email=="")
+        document.getElementById("email_error").innerHTML="Email can't be blank";
+      else if(!x)
+      {debugger
+        document.getElementById("email_error").innerHTML="Enter a valid email";
+        document.getElementById("email").value = ""
+      }
+      else
+        document.getElementById("email_error").innerHTML="";
+    }
+    function validate_num()
+    {
+      var num = document.getElementById("num").value
+      No = num.lemgth
+      if ( num=="" )
+        document.getElementById("num_error").innerHTML="Enter a valid Mobile NO.";
+      else if (No != 10)
+      {
+        document.getElementById("num_error").innerHTML="Enter a valid Mobile NO.";
+        document.getElementById("num").value = ""
+      }
+      else
+        document.getElementById("num_error").innerHTML="";
+    }
+    function confirm_password() {
+      var password = document.getElementById("password").value
+      var confirm_password = document.getElementById("con_pass").value
+      // debugger
+      if (password=="")
+        document.getElementById("pass1").innerHTML="password dose not empty";
+      else if (confirm_password=="")
+      { 
+        document.getElementById("pass1").innerHTML="";
+      }
+      else if (password != confirm_password )
+      {
+        document.getElementById("pass1").innerHTML="password dose not match ";
+        document.getElementById("password").value="";
+        document.getElementById("con_pass").value="";
+      }
+      else
+        document.getElementById("pass1").innerHTML="";
+        document.getElementById("pass2").innerHTML="";
+    }
+    function validate_gender()
+    { var gender1 = document.getElementsByName("gender");
+      if (!gender1[0].checked && !gender1[1].checked)
+      	document.getElementById("gender").innerHTML="Please select the gender";
+      else
+      	document.getElementById("gender").innerHTML="";
+    }
+    function validate_submit()
+    {
+      validate_first()
+      validate_last()
+      validate_email()
+      validate_num()
+      confirm_password()
+      validate_gender()
+    }
+    var x = document.getElementById("gen");
+    x.addEventListener(focusout, validate_gender());
+  </script>
+</body>
+
+</html>
