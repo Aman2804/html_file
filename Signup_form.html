@@ -1,0 +1,141 @@
+<!DOCKTYPE>
+<html>
+<head>
+  <title>signup Form</title>
+  <style>
+    body {background-image: url("login-background-1.jpg");
+  </style>
+</head>
+<body>
+  <h1>Signup</h1>
+  <form id="signup_form"name="sign_up_form"  method="post" >
+  First name:<br>
+  <input id="first" type="text" name="First_name" ><br>
+  <span id="fist_name_error" style="color:red"></span><br>
+  last name:<br>
+  <input id="last" type="text" name="last_name" ><br>
+  <span id="last_name_error" style="color:red"></span><br>
+  Email:<br>
+  <input id="email" type="email" name="email" placeholder="Example.email@gmail.com" ><br>
+  <span id="email_error" style="color:red"></span><br>
+  Mobile No:<br>
+  <input id="num" type="number" name="mobile"  ><br>
+  <span id="num_error" style="color:red"></span><br>
+  Gender:<div id="gender">
+  <input id="gm" type="radio" name="gender" value="male">male <input id="gf" type="radio" name="gender" value="female">female</div><br>
+  <span id="gender_error" style="color: red"></span><br>
+  Password:<br>
+  <input id="password" type="password" name="pwd" ><br>
+  <span id="pass" style="color:red"></span><br>
+  confirm password:<br>
+  <input id="con_pass" type="password" name="pwd" ><br>  
+   <br>
+  <button id="sub"type="submit" name="submit" style="background-color: #4CAF50"
+   value="submit"  >Submit</button><br>
+ </form>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $('#first').keypress(function(key){
+        code = key.which;
+        if ((code >=0 && code <65)||(code >90 && code <97) || (code >122)){
+          key.preventDefault();
+        return false;
+        }
+      })
+      $('#last').keypress(function(key){
+        code = key.which;
+        if ((code >=0 && code <65)||(code >90 && code <97) || (code >122)){
+          key.preventDefault();
+        return false;
+        }
+      })
+      $('#first').blur(function(){validate_first();});
+      function validate_first(){
+        var first = $('#first').val()
+        if (first == "")
+            $("#fist_name_error").text("First Name can't be blank");
+          else
+            $("#fist_name_error").text("");
+      }
+
+      $('#last').blur(function(){validate_last();});
+      function validate_last(){
+        var last = $('#last').val()
+        if (last == "")
+          $("#last_name_error").text("Last Name can't be blank");
+        else
+           $("#last_name_error").text("");
+
+
+      }
+      $('#email').blur(function(){ validate_email();});
+      function validate_email(){
+        var email = $('#email').val()
+        var email_format = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+        var x = email_format.test(email);
+        if (email=="")
+           $("#email_error").text("Enter a email");
+        else if (!x){
+          $("#email_error").text("Enter a valid email");
+        }
+        else
+          $("#email_error").text("");
+
+      }
+
+      $('#num').blur(function(){ validate_num();});
+      function validate_num(){
+        var num = $('#num').val()
+        if ( num=="" )
+          $("#num_error").text("Enter a Mobile NO.");
+        else if (num.length != 10){
+          $("#num_error").text("Enter a valid Mobile NO.");
+        }
+        else
+          $("#num_error").text("");
+      }
+      $('#password').blur(function(){validate_pass();});
+      $('#con_pass').focusout(function(){validate_pass();});
+      function validate_pass(){
+        var password = $('#password').val()
+        var confirm_password  = $('#con_pass').val()
+        if(password==""){
+          $("#pass").text("password can't be empty");
+          $('#con_pass').val("");
+        }
+        else if (password != confirm_password && confirm_password != "" ){
+            $("#pass").text("password dose not match");
+            $('#password').val("");
+            $('#con_pass').val("");
+          }
+        else
+          $("#pass").text("");
+      }
+
+        $('#signup_form').submit(function(){
+
+      validate_first();
+      validate_last();
+      validate_email();
+      validate_num();
+      validate_gender();
+      validate_pass();
+    return false;
+    }
+    );
+    });
+    $("input[name = 'gender']").blur(function(){validate_gender();});
+    function validate_gender(){
+      var gender_bit = $("input[name = 'gender']");
+      if (!gender_bit[0].checked && !gender_bit[1].checked)
+        $("#gender_error").text("Must select one of them");
+      else
+        $("#gender_error").text("");
+    }
+    $("#gm").click(function(){validate_gender()});
+    $("#gf").click(function(){validate_gender();});
+  </script>
+</body>
+
+</html>
